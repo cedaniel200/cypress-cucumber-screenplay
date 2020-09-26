@@ -1,0 +1,36 @@
+{
+    "name": "cypress-1",
+    "version": "1.0.0",
+    "description": "ejericio inicial de instalacion de cypress",
+    "main": "index.js",
+    "scripts": {
+        "cy:open": "cypress open",
+        "e2e": "cypress run",
+        "e2e-report": "node scripts/cypress.js"
+    },
+    "keywords": [
+        "cypress",
+        "screenplay",
+        "cucumber",
+        "testing"
+    ],
+    "author": "cedaniel200",
+    "license": "MIT",
+    "devDependencies": {
+        "cypress": "^4.12.1",
+        "cypress-cucumber-preprocessor": "^2.5.5",
+        "cypress-xpath": "^1.6.0",
+        "fs-extra": "^9.0.1",
+        "mocha": "^7.2.0",
+        "mochawesome": "^6.1.1",
+        "mochawesome-merge": "^4.1.0",
+        "mochawesome-report-generator": "^5.1.0"
+    },
+    "cypress-cucumber-preprocessor": {
+        "nonGlobalStepDefinitions": true
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/cedaniel200/cypress-cucumber-screenplay.git"
+    }
+}
