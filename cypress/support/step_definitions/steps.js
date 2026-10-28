@@ -29,7 +29,7 @@ Then('Cesar ve el mensaje de usuario bloqueado', () => {
   cy.seeText(loginPage.ERROR, 'Sorry, this user has been locked out.')
 })
 
-When('Cesar agrega una mochila al carrito', () => {
+Given('Cesar agrega una mochila al carrito', () => {
   cy.addProductToCart('sauce-labs-backpack')
 })
 
