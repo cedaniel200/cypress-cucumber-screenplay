@@ -17,6 +17,7 @@ interacciones.
 - **Cucumber con `@badeball/cypress-cucumber-preprocessor`** y esbuild.
 - **Screenplay en Cypress**: `tasks` para el negocio, `interactions` para la interfaz,
   `questions` para las validaciones y `ui` para los selectores.
+- **Informe HTML** con `cypress-mochawesome-reporter` y soporte de Cucumber.
 - **Datos de prueba** en fixtures: usuarios y datos del checkout.
 - **Sin credenciales locales**: saucedemo publica sus usuarios de demo.
 
@@ -39,8 +40,23 @@ Para abrir el runner interactivo:
 npm run cy:open
 ```
 
-Cypress muestra el resultado en consola y deja capturas en `cypress/screenshots/` si algún
-escenario falla.
+Cypress muestra el resultado en consola y genera el informe HTML al terminar. Las capturas de los
+escenarios fallidos quedan en `cypress/screenshots/` y se incrustan en el informe.
+
+## Informe
+
+`npm test` deja un único HTML autocontenido en:
+
+```text
+cypress/reports/html/index.html
+```
+
+Incluye el resumen de las features, duración, gráficos, el contexto Gherkin de cada escenario y las
+capturas embebidas si hay fallos. La carpeta `cypress/reports/` está ignorada por git: el informe se
+regenera en cada ejecución.
+
+El reporte usa `cypress-mochawesome-reporter` con `cucumberSupport` y `cypress-on-fix`, para no
+pisar los hooks del preprocesador de Cucumber.
 
 ## Estructura
 
@@ -52,6 +68,7 @@ cypress
 ├── fixtures
 │   ├── users.json                # usuarios de saucedemo
 │   └── customer.json             # datos del checkout
+├── reports                       # informe generado (ignorado por git)
 └── support
     ├── e2e.js                    # carga comandos y tareas
     ├── interactions               # click y escritura

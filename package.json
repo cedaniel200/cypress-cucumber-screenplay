@@ -21,6 +21,8 @@
     "@badeball/cypress-cucumber-preprocessor": "^28.0.1",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
     "cypress": "^16.2.0",
+    "cypress-mochawesome-reporter": "^5.0.0",
+    "cypress-on-fix": "^1.1.0",
     "esbuild": "^0.28.2"
   }
 }

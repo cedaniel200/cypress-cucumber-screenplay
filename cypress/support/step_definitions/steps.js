@@ -1,3 +1,4 @@
+require('cypress-mochawesome-reporter/cucumberSupport')
 const { Given, When, Then } = require('@badeball/cypress-cucumber-preprocessor')
 const loginPage = require('../ui/loginPage')
 const inventoryPage = require('../ui/inventoryPage')
