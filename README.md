@@ -7,9 +7,13 @@
 ![Screenplay](https://img.shields.io/badge/Screenplay-pattern-blue)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
-Login y compra completa contra [saucedemo.com](https://www.saucedemo.com) con Cypress, Cucumber y
-el patrón Screenplay. Los escenarios se escriben en Gherkin y los pasos delegan en tareas e
-interacciones.
+Proyecto de ejemplo para mostrar la forma más sencilla de implementar el patrón Screenplay dentro
+de un proyecto de Cypress usando Cucumber como herramienta de BDD, con las capacidades que ya
+ofrece Cypress. La automatización es independiente de la aplicación: los escenarios Gherkin
+describen el flujo y los pasos delegan en tareas e interacciones.
+
+La versión sin Cucumber está en
+[cypress-screenplay](https://github.com/cedaniel200/cypress-screenplay).
 
 ## Qué incluye
 
