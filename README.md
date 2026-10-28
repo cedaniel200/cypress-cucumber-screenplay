@@ -1,77 +1,86 @@
-# Cypress - Cucumber - Screenplay
+# Cypress + Cucumber + Screenplay — Demo Saucedemo
 
-Proyecto de ejemplo donde se trata de implementar el patrón screenplay dentro de un proyecto de Cypress usando Cucumber como herramienta para BDD y tratando que sea de la manera más simple y usando las caracteristicas y herramientas provistas por Cypress. En este ejemplo la automatización es independiente a la aplicación.
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
+![Cypress](https://img.shields.io/badge/Cypress-16.2.0-green)
+![Cucumber](https://img.shields.io/badge/Cucumber-28.0.1-brightgreen)
+![Node.js](https://img.shields.io/badge/Node.js-22%20%7C%2024%20%7C%2026-brightgreen)
+![Screenplay](https://img.shields.io/badge/Screenplay-pattern-blue)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
-## Cucumber
-Para integrar Cypress con cucumber se hace uso de [cypress-cucumber-preprocessor](https://github.com/TheBrainFamily/cypress-cucumber-preprocessor). Para más información:
+Login y compra completa contra [saucedemo.com](https://www.saucedemo.com) con Cypress, Cucumber y
+el patrón Screenplay. Los escenarios se escriben en Gherkin y los pasos delegan en tareas e
+interacciones.
 
-[Cypress](https://www.cypress.io/)
+## Qué incluye
 
-[Cucumber](https://cucumber.io/)
+- **3 escenarios** en dos features: login válido, usuario bloqueado y compra completa.
+- **Cucumber con `@badeball/cypress-cucumber-preprocessor`** y esbuild.
+- **Screenplay en Cypress**: `tasks` para el negocio, `interactions` para la interfaz,
+  `questions` para las validaciones y `ui` para los selectores.
+- **Datos de prueba** en fixtures: usuarios y datos del checkout.
+- **Sin credenciales locales**: saucedemo publica sus usuarios de demo.
 
-[cypress-cucumber-preprocessor](https://github.com/TheBrainFamily/cypress-cucumber-preprocessor#get-started)
+## Requisitos
 
----
+- **Node.js 22, 24 o 26** (los que soporta Cypress 16).
+- **npm**.
+- **Acceso a internet**: los escenarios visitan saucedemo.com.
 
-## Instalación
-Abrimos una consola y nos ubicamos en el directorio del proyecto. Ejecutamos el siguiente comando.
+## Cómo se ejecuta
 
-    npm install
+```sh
+npm install
+npm test
+```
 
-## Ejecución
+Para abrir el runner interactivo:
 
-Antes de ejecutar el proyecto hay que cambiar dentro de la carpete cypress/fixtures el archivo **user.json** dos datos:
+```sh
+npm run cy:open
+```
 
-    "email": "your@Email",
-    "rightPassword": "your_password"
+Cypress muestra el resultado en consola y deja capturas en `cypress/screenshots/` si algún
+escenario falla.
 
-Es importante tener en cuenta que los comando que usamos para las ejecuciones estan configurados en el archivo package.json en el atributo scripts, a continuación los comandos y su equivalencia:
+## Estructura
 
-    cy:open: cypress open
-    e2e: cypress run
-    e2e-report: node scripts/cypress.js
+```text
+cypress
+├── e2e
+│   ├── authentication.feature    # login válido y usuario bloqueado
+│   └── purchase.feature          # carrito y checkout
+├── fixtures
+│   ├── users.json                # usuarios de saucedemo
+│   └── customer.json             # datos del checkout
+└── support
+    ├── e2e.js                    # carga comandos y tareas
+    ├── interactions               # click y escritura
+    ├── questions                  # visibilidad y texto
+    ├── step_definitions/steps.js  # pasos Gherkin
+    ├── tasks                      # login, carrito y checkout
+    └── ui                         # selectores por pantalla
+```
 
-### Ejecución desde el modo interactivo
+## Screenplay con Cucumber
 
-Para abrir el Cypress Test Runner en modo interactivo ejecutamos el comando:
+| Concepto | Dónde vive | Ejemplo |
+|---|---|---|
+| Escenario | `cypress/e2e/*.feature` | «Compra de un producto» |
+| Paso | `support/step_definitions` | `Cesar agrega una mochila al carrito` |
+| Tarea | `support/tasks` | `cy.authenticate(...)` |
+| Interacción | `support/interactions` | `cy.typeInto(...)` |
+| Pregunta | `support/questions` | `cy.seeVisible(...)` |
+| UI | `support/ui` | selectores de login y carrito |
 
-    npm run cy:open
+El feature describe el negocio; el paso traduce ese lenguaje a tareas, y las tareas delegan en
+interacciones y selectores. Así el escenario no conoce detalles de la interfaz.
 
-Una vez abierto, seleccionamos el archivo (filename.spec.js) que queramos ejecutar. 
+## Ten en cuenta
 
-### Ejecución en navegador headless
-Para ejecutar sobre la consola ejecutamos el comando:
+- **Saucedemo es un sitio público de práctica.** No hay datos reales ni credenciales privadas.
+- **Los tests dependen de la red.** Si saucedemo no responde, fallan por el sitio, no por el código.
+- **Cypress 16 requiere Node 22 o superior.** Con Node 18 o 20 no arranca.
 
-    npm run e2e
+## Licencia
 
-### Reporte de pruebas
-Para obtener un reporte de pruebas diferente al que nos aporta Cypress, ejecutamos el comando:
-
-    npm run e2e-report
-
-Se creará la carpeta mochawesome-report donde se encontrará el archivo **mochawesome.html**
-
-## Arquitectura 
-
-### Fixtures
-Encontramos los datos estaticos usados en la automatización.
-
-### Integration 
-Encontramos los archivos .feature, es decir, nuestros casos de pruebas  y/o escenarios de pruebas.
-
-La definición de los pasos debe estar en archivos .js (se recomienda que tenga el mismo nombre que el archivo feature), dentro de una carpeta que tenga el mismo nombre que el archivo .feature.
-
-    Ejemplo
-
-        path\cypress\integration\caracteristica.feature
-        path\cypress\integration\caracteristica\caracteristica.js
-    
-### plugins
-Para este ejemplo se usa, par el complementos de cucumber.
-
-### Support
-Permite agregar nuestros archivos de soporte, en este caso aca se incluiran los directorios necesarios para dar soporte al patrón screenplay.
-*   interactions -> Representan las interacciones directas con la interfaz de usuario
-*   taks -> Representan tareas que se realizan a nivel de proceso de negocio
-*   ui -> Mapean los elementos de la interfaz de usuario
-
+[MIT](LICENSE) © Cesar Daniel
